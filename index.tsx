@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Graph } from './graph';
 import './style.css';

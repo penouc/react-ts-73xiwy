@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { uuid } from './utils';
 
 function Graph() {
   const [num, setNum] = useState(123);
+  const uid = uuid();
 
-  return <div>{num}</div>;
+  useEffect(() => {});
+
+  return <div id={uid}></div>;
 }
 
 export { Graph };
