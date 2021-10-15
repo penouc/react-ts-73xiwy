@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import G6 from '@antv/g6';
 import { uuid } from './utils';
 import { mockData } from './demo/indexTree';
+import './nodes';
 
 //  组件props
 const props = {
@@ -11,7 +13,10 @@ const props = {
     defaultZoom: 0.8,
     modes: { default: ['zoom-canvas', 'drag-canvas'] },
   },
+  onInit: (a) => a,
 };
+
+let graph = null;
 
 function Graph() {
   const uid = uuid();
@@ -31,7 +36,7 @@ function Graph() {
       fitView: true,
       animate: true,
       defaultNode: {
-        type: 'flow-rect',
+        type: 'blocks',
       },
       defaultEdge: {
         type: 'cubic-horizontal',
@@ -49,6 +54,20 @@ function Graph() {
         },
       },
     };
+
+    const { onInit, config, data } = props;
+
+    graph = new G6.TreeGraph({
+      container: uid,
+      ...defaultConfig,
+      ...config,
+    });
+    if (typeof onInit === 'function') {
+      onInit(graph);
+    }
+    graph.data(data);
+    graph.render();
+    graph.zoom(config.defaultZoom || 1);
   });
 
   return <div id={uid}></div>;
