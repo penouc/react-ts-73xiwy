@@ -24,7 +24,7 @@ function Graph() {
   useEffect(() => {
     const container = document.getElementById(uid);
     const width = container.scrollWidth;
-    const height = container.scrollHeight || 500;
+    const height = container.scrollHeight || 400;
 
     // 默认配置
     const defaultConfig = {
